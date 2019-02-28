@@ -5,6 +5,9 @@ pipeline {
     }
 
   }
+  options {
+    withAWS(credentials:'harmony-s3')
+  }
   stages {
     stage('MCL') {
       steps {
@@ -57,6 +60,17 @@ pipeline {
     stage('Save Build') {
       steps {
         archiveArtifacts 'build/**'
+      }
+    }
+    stage('Upload') {
+      steps {
+        script {
+          s3Upload(
+            file: 'build/bls.cpio.xz',
+            bucket: 'harmony-jenkins-artifacts',
+            path: 'bls.cpio.xz',
+          )
+        }
       }
     }
   }

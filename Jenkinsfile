@@ -18,9 +18,9 @@ pipeline {
     stage('Configure') {
       steps {
         sh '''
+          mcldir=$(pwd)/mcl
           mkdir -p build
           cd build
-          mcldir=$(pwd)/mcl
           CFLAGS="-I${mcldir}/include" CXXFLAGS="-I${mcldir}/include" LDFLAGS="-L${mcldir}/lib" cmake ..
         '''
       }

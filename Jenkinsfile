@@ -15,6 +15,7 @@ pipeline {
           unxz < mcl.cpio.xz | (cd mcl && exec cpio -idumv)
         '''
       }
+    }
     stage('Configure') {
       steps {
         sh '''

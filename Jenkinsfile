@@ -9,7 +9,7 @@ pipeline {
     stage('MCL') {
       steps {
         sh '''
-          curl -L -o mcl.zip 'https://s3-us-west-2.amazonaws.com/harmony-jenkins-artifacts/mcl/add_jenkins_pipeline:16@32b5022e759de1de3d07b431c0ac8ba708943c6d.zip'
+          curl -L -o mcl.zip 'https://s3-us-west-2.amazonaws.com/harmony-jenkins-artifacts/mcl/mcl-add_jenkins_pipeline:16@32b5022e759de1de3d07b431c0ac8ba708943c6d.zip'
           unzip mcl.zip mcl.cpio.xz
           mkdir mcl
           unxz < mcl.cpio.xz | (cd mcl && exec cpio -idumv)

@@ -15,20 +15,17 @@ pipeline {
         '''
       }
     }
-    stage('Configure') {
+    stage('Configure & Build') {
       steps {
         sh '''
           mkdir -p build
           cd build
           mcldir=$(pwd)/mcl
-          CFLAGS="-I${mcldir}/include" CXXFLAGS="-I${mcldir}/include" LDFLAGS="-L${mcldir}/lib" cmake ..
-        '''
-      }
-    }
-    stage('Build') {
-      steps {
-        sh '''
-          cd build
+          CFLAGS="-I${mcldir}/include"
+          CXXFLAGS="-I${mcldir}/include"
+          LDFLAGS="-L${mcldir}/lib"
+          export CFLAGS CXXFLAGS LDFLAGS
+          cmake ..
           make
         '''
       }
